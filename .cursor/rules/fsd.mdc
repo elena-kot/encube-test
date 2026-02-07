@@ -1,0 +1,37 @@
+---
+description: Feature-Sliced Design for Encube
+globs: src/**/*.{ts,tsx}
+alwaysApply: true
+---
+
+## Feature-Sliced Design
+
+### Layers (top → bottom)
+1. `widgets/` — self-contained UI blocks composing features + entities (e.g. `infinite-canvas`).
+2. `features/` — user actions that bring business value (e.g. `canvas-viewport`).
+3. `entities/` — business objects (e.g. `design-element`, `comment`).
+4. `shared/` — reusable code detached from business. No slices, segments only.
+
+### Import Rule
+- A module may **only** import from layers **strictly below** it.
+- `widgets/` can import from `features/`, `entities/`, `shared/`.
+- `features/` can import from `entities/`, `shared/`.
+- `entities/` can import from `shared/`.
+- **No same-layer cross-slice imports** (e.g. one entity cannot import another).
+
+### Slice Structure
+Each slice contains segments:
+- `ui/` — React components, display logic.
+- `api/` — backend calls: `service.ts`, `types.ts`, `mapper.ts`.
+- `model/` — types, hooks, stores, constants, business logic.
+
+### Public API
+- Every slice must have an `index.ts` barrel that defines its public API.
+- Internal files must not be imported directly from outside the slice.
+
+### Shared Layer Segments
+- `shared/api/` — centralized HTTP client.
+- `shared/lib/` — generic utilities (clamp, coordinate conversion).
+- `shared/types/` — geometry primitives shared across the app.
+- `shared/ui/` — Tailwind-based atom components.
+- `shared/styles/` — global CSS.

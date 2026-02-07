@@ -1,0 +1,31 @@
+---
+description: Project-wide coding standards for Encube
+globs: **/*.{ts,tsx}
+alwaysApply: true
+---
+
+## Coding Standards
+
+### Feature-Sliced Design
+- See `fsd.mdc` for full architecture rules.
+
+### Keep it SOLID
+- Keep state management separated from ui.
+- Single Responsibility: one concern per file.
+- Depend on abstractions (types), not concretions.
+
+### Strict TypeScript
+- No `any` or `unknown` types; explicit types only.
+- Every function parameter and return type must be annotated.
+- Prefer `type` over `interface` for object shapes.
+
+### Absolute Imports
+- Always use `@/` prefix for imports from `src/`.
+- Alphabetical import ordering: external packages first, then `@/` imports by layer.
+
+### Array Methods
+- Prefer JavaScript array methods (`map`, `filter`, `forEach`, `reduce`, `find`, `some`, `every`) over `for` loops.
+
+### Tailwind CSS
+- Use Tailwind utility classes for all styling.
+- Shared UI atoms live in `@/shared/ui/`.

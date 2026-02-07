@@ -1,0 +1,1 @@
+export { CanvasOverlay } from '@/widgets/canvas-overlay/ui/CanvasOverlay';

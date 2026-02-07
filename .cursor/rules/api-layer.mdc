@@ -1,0 +1,20 @@
+---
+description: API layer conventions for Encube
+globs: **/api/**/*.ts
+alwaysApply: true
+---
+
+## API Layer Standards
+
+### Centralized Client
+- All HTTP calls go through `@/shared/api/client.ts` — never use `fetch` directly in slices.
+- Base URL is configured via `VITE_API_BASE_URL` env var.
+
+### Entity API Services
+- API calls live in `entities/{entityName}/api/{entityName}.service.ts`.
+- Each service has a co-located `.raw.ts` for raw API shapes and `.mapper.ts` for conversion.
+
+### Infrastructure to Domain Mapping
+- Services must return **domain types** (from the entity's `model/`), never raw API shapes.
+- Raw types are internal to the `api/` segment and must not be imported outside of it.
+- Mapper functions handle snake_case → camelCase and flat → nested conversions.
